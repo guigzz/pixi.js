@@ -30,9 +30,9 @@ export default class Sprite extends Container
 
         /**
          * The anchor sets the origin point of the texture.
-         * The default is 0,0 this means the texture's origin is the top left
-         * Setting the anchor to 0.5,0.5 means the texture's origin is centered
-         * Setting the anchor to 1,1 would mean the texture's origin point will be the bottom right corner
+         * The default is 0,0 this means the texture's origin is the top left.
+         * Setting the anchor to 0.5,0.5 means the texture's origin is centered.
+         * Setting the anchor to 1,1 would mean the texture's origin point will be the bottom right corner.
          *
          * @member {PIXI.ObservablePoint}
          * @private
@@ -418,6 +418,8 @@ export default class Sprite extends Container
     {
         super.destroy(options);
 
+        this._texture.off('update', this._onTextureUpdate, this);
+
         this._anchor = null;
 
         const destroyTexture = typeof options === 'boolean' ? options : options && options.texture;
@@ -573,7 +575,7 @@ export default class Sprite extends Container
             return;
         }
 
-        this._texture = value;
+        this._texture = value || Texture.EMPTY;
         this.cachedTint = 0xFFFFFF;
 
         this._textureID = -1;
