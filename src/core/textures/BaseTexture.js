@@ -462,9 +462,8 @@ export default class BaseTexture extends EventEmitter
                 imageType = 'png';
             }
         }
-        // Fix loaded svg are not smooth when rendered
-        // dirty hack: don't know exactly why it fixes aliasing issue, but it does.... on everything except IE of course...
-        this.imageType = undefined;
+
+        this.imageType = imageType;
     }
 
     /**
